@@ -20,12 +20,21 @@ background-color: white;
 .card-shadow{
 box-shadow: 15px 15px 10px rgba(0, 0, 0, 0.16);
 }
+
 .logo-sm {
 width: 65%;
 }
 
 .logo-md {
 width: 80%;
+}
+
+.logo-s{
+  width: 40%;
+}
+
+.logo-xs {
+  width: 20%;
 }
 
 .bg-cover {
