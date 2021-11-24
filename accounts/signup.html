@@ -46,10 +46,10 @@
     <div class="container-fluid border border-secondary border-width-lg min-vh-100">
       <div class="row">
         <div class="col">
-          <nav class="navbar navbar-light bg-white py-1">
+          <nav class="navbar navbar-light bg-white py-0">
             <a class="navbar-brand" href="index.html">
-              <img class="mt-2 mr-2 logo-xs" src="../static/imgs/eID-logo.png">
-              <img class="mt-2 logo-xs" src="../static/imgs/ISU logo-s.png">
+              <img class="mr-1 logo-xs" src="../static/imgs/eID-logo.png">
+              <img class="logo-xs" src="../static/imgs/ISU logo-s.png">
             </a>
           </nav>
         </div>
@@ -57,55 +57,31 @@
       <form>
         <div class="row justify-content-center">
           <div class="col-7 bg-light rounded-lg">
-              <div class="form-group pt-2 mb-2">
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="電子郵件">
+              <div class="form-group pt-2 mb-1">
+                <input type="email" class="form-control form-control-sm" id="email" aria-describedby="emailHelp" placeholder="電子郵件">
               </div>
               <div class="form-group mb-1">
-                <input type="password" class="form-control" id="password" placeholder="密碼">
+                <input type="text" class="form-control form-control-sm" id="password" placeholder="使用者名稱">
               </div>
-              <p class="pb-2 mb-0"><small>忘記密碼？</small></p>
+              <div class="form-group mb-1">
+                <input type="password" class="form-control form-control-sm" id="email"  placeholder="密碼">
+                <small class="fz-xs text-danger">密碼不得少於 8 字元</small>
+              </div>
+              <div class="form-group mb-1">
+                <input type="password" class="form-control form-control-sm" id="password" placeholder="確認密碼">
+                <small class="fz-xs text-danger">密碼不得少於 8 字元</small>
+              </div>
           </div>
         </div>
-        <div class="row justify-content-center mt-2">
-          <div class="col-7 px-0">
-            <button type="submit" class="btn btn-block btn-primary">登入</button>
+        <div class="row justify-content-center align-items-center h-100 mt-2">
+          <div class="col-7 px-0" id="captcha">
+            <img src="https://fakeimg.pl/380x60/?text=安全驗證&font=noto">
           </div>
+        </div>
+        <div class="text-center mt-2">
+          <button type="submit" class="btn btn-success">註冊</button>
         </div>
       </form>
-      <div class="row justify-content-center align-items-center h-100">
-        <div class="col-7">
-          <div class="row">
-            <div class="col-5 px-0">
-              <hr class="border-sm">
-            </div>
-            <div class="col-2 mt-1 px-0 text-center"> 
-              <p class="mb-0 text-dark">或</p>
-            </div>
-            <div class="col-5 px-0">
-              <hr class="border-sm">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6 pl-0 pr-1">
-              <a href="" class="btn btn-block btn-success bg-fb border-fb">
-                <img src="../static/imgs/fb-logo-s.png" alt="">
-                透過 Facebook 登入
-              </a>
-            </div>
-            <div class="col-6 pr-0 pl-1">
-              <a href="" class="btn btn-block btn-outline-secondary">
-                <img src="../static/imgs/google-logo-s.png" alt="">
-                透過 Google 登入
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="text-center mt-2">
-        <a class="btn btn-success" href="/accounts/signup.html">
-          建立新帳號
-        </a>
-      </div>
       </div>
     </div>
   </body>
