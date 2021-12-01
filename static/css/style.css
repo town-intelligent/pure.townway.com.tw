@@ -21,10 +21,6 @@ background-color: white;
 box-shadow: 15px 15px 10px rgba(0, 0, 0, 0.16);
 }
 
-.logo-xs {
-  width: 20%;
-}
-
 .logo-sm {
 width: 65%;
 }
@@ -33,7 +29,9 @@ width: 65%;
 width: 80%;
 }
 
-
+.logo-isu{
+  width: 46.5px;
+}
 
 .bg-cover {
 background-size: cover;
