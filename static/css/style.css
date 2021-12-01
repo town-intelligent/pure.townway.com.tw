@@ -24,12 +24,12 @@ box-shadow: 15px 15px 10px rgba(0, 0, 0, 0.16);
 width: 65%;
 }
 
-.logo-xs {
-  width: 20%;
-  }
-
 .logo-md {
 width: 80%;
+}
+
+.logo-isu{
+  width: 46.5px;
 }
 
 .bg-cover {
@@ -40,12 +40,4 @@ background-position: center center;
 .bg-contain {
 background-size: contain;
 background-position: center center;
-}
-
-.bg-fb {
-  background:#4267B2;
-}
-
-.border-fb {
-  border-color: #4267B2;
 }
