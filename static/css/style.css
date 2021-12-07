@@ -42,3 +42,7 @@ background-position: center center;
 background-size: contain;
 background-position: center center;
 }
+
+.fz-xs{
+  font-size: 10px;
+}
