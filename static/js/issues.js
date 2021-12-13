@@ -116,7 +116,7 @@ function set_task_in_page(obj) {
 
   var a = document.createElement("a"); 
   a.src = obj.thumbnail;
-  a.href = "/issues-1.html?uuid=" + obj.uuid;
+  a.href = "/issue-executor.html?uuid=" + obj.uuid;
   
   // Append
   elem_issues_list.appendChild(col_md_4);
@@ -195,4 +195,13 @@ function get_user_uuid_tasks(username) {
 
 function list_issues(username) {
   get_user_uuid_tasks(username);
+}
+
+// ---- ISU
+function finish_task() {
+  // disable: btn_finish_task
+  document.getElementById("btn_finish_task").disabled = true;
+
+  // show task summary
+  document.getElementById("task_summary").style.visibility = "visible";
 }
