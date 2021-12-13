@@ -1,17 +1,22 @@
 function get_task(url) {
-  console.log("Getting rocess task ...");
+  console.log("Getting process task ...");
 
   var path = url.split("/");
   var uuid_task = path[4];
   var url_task_save = "https://eid-backend.townway.com.tw/tasks/save";
 
-  var username = getCookie("username");
+  // var username = getCookie("username");
+  var dataJSON = {};
+  dataJSON.username = getCookie("username");
+  dataJSON.uuid = uuid_task;
+  console.log("hello, uuid_task = " + uuid_task);
 
   $.ajax({
-    url: url_task_save + "/" + uuid_task + "?username=" + username,
-    type: "GET",
+    url: url_task_save,
+    type: "POST",
     async: false,
     crossDomain: true,
+    data:  dataJSON,
     success: function(returnData) {
       console.log(returnData);
 
