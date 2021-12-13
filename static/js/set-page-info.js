@@ -38,7 +38,7 @@ function setPageInfo() {
 
     // Submit weight and clear all ticket
     // TODO: clear all tickets
-    submit_weight();
+    // submit_weight();
     
   } else if (page == "wallet.html") {
     $("#nav-wallet").addClass("active");

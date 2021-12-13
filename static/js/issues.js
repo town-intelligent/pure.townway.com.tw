@@ -205,3 +205,26 @@ function finish_task() {
   // show task summary
   document.getElementById("task_summary").style.visibility = "visible";
 }
+
+function list_tasks(username) {
+  var list_issues = [];
+  var dataJSON = {};
+  dataJSON.username = username;
+  $.ajax({
+    url: "https://eid-backend.townway.com.tw/tasks/list",
+    type: "POST",
+    async: false,
+    crossDomain: true,
+    data:  dataJSON,
+    success: function(returnData) {
+       const obj = JSON.parse(returnData);
+       // Set Cookie
+       setCookie("list_tasks", obj.uuid, 1);
+       list_issues = obj.uuid;
+    },
+    error: function(xhr, ajaxOptions, thrownError){
+      console.log(thrownError);
+    }
+  });
+  return list_issues;
+}
