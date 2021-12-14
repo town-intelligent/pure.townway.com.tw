@@ -147,6 +147,17 @@ function submitTaskTickets(task_UUID) {
   return taskWeight;
 }
 
+function detectNoNeedSubmitTask(list_task_UUIDs) {
+  for (var index = 0; index < list_task_UUIDs.length; index ++) {
+    // FIXME: Should be type, not uuid
+    if (list_task_UUIDs[index] === "00000007") {
+        list_task_UUIDs.splice(index, 1);
+    }
+  }
+
+  return list_task_UUIDs;
+}
+
 function updateNodeData() {
   // Get user tasks
   var str_list_task_UUIDs = getCookie("list_tasks");
@@ -154,10 +165,13 @@ function updateNodeData() {
   if (str_list_task_UUIDs === "") {
     // Get user task UUIDs
     list_task_UUIDs = list_tasks(getCookie("username"));
-    setCookie("list_tasks", JSON.stringify(list_task_UUIDs), 1);
+    setCookie("list_tasks", list_task_UUIDs, 1);
   } else {
     list_task_UUIDs = str_list_task_UUIDs.split(",");
   }
+
+  // Remove no need submit task
+  list_task_UUIDs = detectNoNeedSubmitTask(list_task_UUIDs);
 
   // Submit all tasks
   for (var index = 0; index < list_task_UUIDs.length; index ++) {

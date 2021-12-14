@@ -1,6 +1,32 @@
 function setInfoEid() {
   // Set username
   $("#userid").text(getCookie("username"));
+
+ // var balance = document.getElementById("balance");
+ // balance.innerHTML = "30";
+
+  // Set balance
+  var dataJSON = {};
+  dataJSON.email = getCookie("email");
+  dataJSON.ec = 0;
+  $.ajax({
+    url: "https://eid-backend.townway.com.tw/accounts/balance",
+    type: "POST",
+    async: false,
+    crossDomain: true,
+    data:  dataJSON,
+    success: function(returnData) {
+       const obj = JSON.parse(returnData);
+       // Set balance
+       var balance = document.getElementById("balance");
+       balance.innerHTML = obj;
+    },
+    error: function(xhr, ajaxOptions, thrownError){
+      console.log(thrownError);
+    }
+  });
+
+
 }
 
 function setPageInfo() {
@@ -31,6 +57,22 @@ function setPageInfo() {
       document.getElementById("task_name").innerHTML = obj_task.name;
       document.getElementById("task_balance").innerHTML = obj_task.token;
       document.getElementById("task_summary").style.visibility = "hidden";
+    } else if (page === "issue-verifier.html") {
+      // Get all tasks and users
+      var str_list_task_UUIDs = getCookie("list_tasks");
+      var list_task_UUIDs  = [];
+      if (str_list_task_UUIDs === "") {
+        // Get user task UUIDs
+        list_task_UUIDs = list_tasks(getCookie("username"));
+        setCookie("list_tasks", JSON.stringify(list_task_UUIDs), 1);
+      } else {
+        list_task_UUIDs = str_list_task_UUIDs.split(",");
+      }
+
+      // Ready to verified tasks
+      for (var index = 0; index < list_task_UUIDs.length; index ++) {
+        updateVerifyTasksTable(list_task_UUIDs[index]);
+      }
     }
   
   }else if (page == "foot_print.html") {

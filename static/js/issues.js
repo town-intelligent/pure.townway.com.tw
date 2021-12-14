@@ -116,13 +116,24 @@ function set_task_in_page(obj) {
 
   var a = document.createElement("a"); 
   a.src = obj.thumbnail;
-  a.href = "/issue-executor.html?uuid=" + obj.uuid;
+
+  if (obj.type_task === 2){ 
+    a.href = "/issue-verifier.html?uuid=" + obj.uuid;
+  } else {
+    a.href = "/issue-executor.html?uuid=" + obj.uuid;
+  }
+
+  var card_p_4 = document.createElement("div");
+  card_p_4.className = "card p-4";
+  card_p_4.innerHTML = obj.name;
   
   // Append
   elem_issues_list.appendChild(col_md_4);
   col_md_4.appendChild(card_p_3_mb_2);
   card_p_3_mb_2.appendChild(a);
   a.appendChild(img);
+
+  card_p_3_mb_2.appendChild(card_p_4);
 }
 
 function get_task_info(req_uuid_task, set_page = 1) {
@@ -227,4 +238,126 @@ function list_tasks(username) {
     }
   });
   return list_issues;
+}
+
+function addToVerify(length) {
+  // Task UUID
+  var list_tasks = [];
+  for (var index = 0; index < length; index ++) {
+    var checkbox = document.getElementById("checkbox_" + index);
+    var email = document.getElementById("email_" + index);
+    var uuid = document.getElementById("uuid_" + index);
+    
+    if (checkbox.checked === false) {
+      continue;
+    }
+
+    var dataJSON = {};
+    dataJSON.email = email.value;
+    dataJSON.uuid = uuid.value;
+
+    list_tasks.push(dataJSON);
+  }
+
+  // Set to cookie
+  console.log("tasks_verify");
+  setCookie("tasks_verify", JSON.stringify(list_tasks), 1);
+}
+
+function addVrerifyTable(obj) {
+  // table_verify_tasks
+  var tbodyRef = document.getElementById("table_verify_tasks").getElementsByTagName("tbody")[0];
+
+  for (var index = 0; index < obj.length; index ++) {
+    // Insert a row at the end of table
+    var newRow = tbodyRef.insertRow();
+
+    // th: <th scope="row" class="text-center">
+    var newCell_th = newRow.insertCell();
+    var th = document.createElement("th");
+    th.className = "text-center";
+    newCell_th.appendChild(th);
+
+    // Checkbox : <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+    // var newCell_checkbox = newRow.insertCell();
+    var checkbox = document.createElement('input');
+    checkbox.type = "checkbox";
+    checkbox.id = "checkbox_" + index;
+	  
+    checkbox.onclick = function () {
+      addToVerify(obj.length);
+    };
+	  
+    // newCell_checkbox.appendChild(checkbox);
+
+    th.appendChild(checkbox);
+
+    // Username
+    var newCell_username = newRow.insertCell();
+    var newText_username = document.createTextNode(obj[index].username);
+    newCell_username.appendChild(newText_username);
+    
+    // E-Mail
+    var newCell_email = newRow.insertCell();
+    var newText_email = document.createTextNode(obj[index].email);
+    newText_email.id = "email_" + index;
+    newCell_email.appendChild(newText_email);
+
+    var newCell_email_div = newRow.insertCell();
+    var obj_email = document.createElement("div");
+    obj_email.id = "email_" + index;
+    obj_email.value = obj[index].email;
+    newCell_email_div.appendChild(obj_email);
+    
+    // Task name
+    var newCell_task_name = newRow.insertCell();
+    var newText_task_name = document.createTextNode(obj[index].task_name);
+    newCell_task_name.appendChild(newText_task_name);
+
+    // Task UUID
+    var newCell_uuid = newRow.insertCell();
+    var obj_uuid = document.createElement("div");
+    obj_uuid.id = "uuid_" + index;
+    obj_uuid.value = obj[index].uuid;
+    newCell_uuid.appendChild(obj_uuid);
+
+    // Token
+    var newCell_token = newRow.insertCell();
+    var newText_token = document.createTextNode(obj[index].token);
+    newCell_token.appendChild(newText_token);
+  }
+}
+
+function updateVerifyTasksTable(uuid_task) {
+  var dataJSON = {};
+  dataJSON.uuid = uuid_task;
+  $.ajax({
+    url: "https://eid-backend.townway.com.tw/tasks/summary",
+    type: "POST",
+    async: false,
+    crossDomain: true,
+    data:  dataJSON,
+    success: function(returnData) {
+       const obj = JSON.parse(returnData);
+       addVrerifyTable(obj);
+    },
+    error: function(xhr, ajaxOptions, thrownError){
+      console.log(thrownError);
+    }
+  });
+}
+
+function clickAll() {
+  var index = 0;
+  while (true) {
+    var checkbox = document.getElementById("checkbox_" + index);
+    if (checkbox === null) {
+      break;
+    }
+    checkbox.checked = true;
+
+    index = index + 1;
+  }
+
+  addToVerify(index);
 }

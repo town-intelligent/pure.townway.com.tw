@@ -18,11 +18,29 @@
     <script src="static/js/set-page-info.js"></script>
     <script src="static/js/init.js"></script>
     <script>
-      function issues(project_id) {
-        setCookie("project_id", project_id, 1);
-        window.location.replace("/issues-1.html");
-      }
+    $(function () {
+      $('form').on('submit', function(e){
+        console.log("tasks_verify submit !!!");
+         var dataJSON = {};
+	 obj_tasks_verify = getCookie("tasks_verify");
+	 dataJSON.tasks_list = obj_tasks_verify;
+         $.ajax({
+           url: "https://eid-backend.townway.com.tw/tasks/verify",
+           type: "POST",
+           async: false,
+           crossDomain: true,
+           data:  dataJSON,
+           success: function(returnData) {
+             const obj = JSON.parse(returnData);
+           },
+           error: function(xhr, ajaxOptions, thrownError){
+             console.log(thrownError);
+           }
+         });
+      });
+    });
     </script>
+
   </head>
 
   <body onload="init();">
@@ -56,14 +74,14 @@
           <div class="container">
             <div class="row justify-content-center mt-3">
               <div class="col-12 px-0">
-                <form action="">
+                <form>
                   <div style="height: 220px; overflow-y: scroll;" class="border p-2">
-                    <table class="table table-striped">
+                    <table id="table_verify_tasks" class="table table-striped">
                       <thead>
                         <tr>
                           <th scope="col" class="text-center">
                             <div class="form-check">
-                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                              <input id="checkbox_all" class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..." onclick="clickAll()">
                             </div>
                           </th>
                           <th scope="col" class="text-center">使用者名稱</th>
@@ -73,61 +91,6 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row" class="text-center">
-                            <div class="form-check">
-                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                            </div>
-                          </th>
-                          <td class="text-center align-middle">user1</td>
-                          <td class="text-center align-middle">user1@gmail.com</td>
-                          <td class="text-center align-middle">mission1</td>
-                          <td class="text-center align-middle">10</td>
-                        </tr>
-                        <tr>
-                          <th scope="row" class="text-center">
-                            <div class="form-check">
-                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                            </div>
-                          </th>
-                          <td class="text-center align-middle">user2</td>
-                          <td class="text-center align-middle">user2@gmail.com</td>
-                          <td class="text-center align-middle">mission2</td>
-                          <td class="text-center align-middle">100</td>
-                        </tr>
-                        <tr>
-                          <th scope="row" class="text-center">
-                            <div class="form-check">
-                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                            </div>
-                          </th>
-                          <td class="text-center align-middle">user3</td>
-                          <td class="text-center align-middle">user3@gmail.com</td>
-                          <td class="text-center align-middle">mission3</td>
-                          <td class="text-center align-middle">5</td>
-                        </tr>
-                        <tr>
-                          <th scope="row" class="text-center">
-                            <div class="form-check">
-                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                            </div>
-                          </th>
-                          <td class="text-center align-middle">user4</td>
-                          <td class="text-center align-middle">user4@gmail.com</td>
-                          <td class="text-center align-middle">mission4</td>
-                          <td class="text-center align-middle">50</td>
-                        </tr>
-                        <tr>
-                          <th scope="row" class="text-center">
-                            <div class="form-check">
-                              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                            </div>
-                          </th>
-                          <td class="text-center align-middle">user5</td>
-                          <td class="text-center align-middle">user5@gmail.com</td>
-                          <td class="text-center align-middle">mission5</td>
-                          <td class="text-center align-middle">12</td>
-                        </tr>
                       </tbody>
                     </table>
                   </div>
