@@ -18,11 +18,29 @@
     <script src="static/js/set-page-info.js"></script>
     <script src="static/js/init.js"></script>
     <script>
-      function issues(project_id) {
-        setCookie("project_id", project_id, 1);
-        window.location.replace("/issues-1.html");
-      }
+    $(function () {
+      $('form').on('submit', function(e){
+        console.log("tasks_verify submit !!!");
+         var dataJSON = {};
+	 obj_tasks_verify = getCookie("tasks_verify");
+	 dataJSON.tasks_list = obj_tasks_verify;
+         $.ajax({
+           url: "https://eid-backend.townway.com.tw/tasks/verify",
+           type: "POST",
+           async: false,
+           crossDomain: true,
+           data:  dataJSON,
+           success: function(returnData) {
+             const obj = JSON.parse(returnData);
+           },
+           error: function(xhr, ajaxOptions, thrownError){
+             console.log(thrownError);
+           }
+         });
+      });
+    });
     </script>
+
   </head>
 
   <body onload="init();">
@@ -30,8 +48,9 @@
       <div class="row">
         <div class="col">
           <nav class="navbar navbar-expand-sm navbar-light bg-white align-items-center px-0">
-            <a class="navbar-brand mr-0" href="index.html">
-              <img class="logo-md" src="static/imgs/eID-logo.png">
+            <a class="navbar-brand mr-3" href="index.html">
+              <img class="mr-1 logo-isu" src="static/imgs/eID-logo.png">
+              <img class="logo-isu" src="static/imgs/ISU logo-s.png">
             </a>
               <ul class="nav nav-tabs w-100 mr-3">
                 <li class="nav-item">
@@ -52,8 +71,34 @@
               </a>
           </nav>
           
-          <div class="row mt-5" id="issues-list">
-          </div>
+          <div class="container">
+            <div class="row justify-content-center mt-3">
+              <div class="col-12 px-0">
+                <form>
+                  <div style="height: 220px; overflow-y: scroll;" class="border p-2">
+                    <table id="table_verify_tasks" class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col" class="text-center">
+                            <div class="form-check">
+                              <input id="checkbox_all" class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..." onclick="clickAll()">
+                            </div>
+                          </th>
+                          <th scope="col" class="text-center">使用者名稱</th>
+                          <th scope="col" class="text-center">電子郵件</th>
+                          <th scope="col" class="text-center">志工任務名稱</th>
+                          <th scope="col" class="text-center">時數(hrs)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                  <button type="submit" class="btn btn-primary mt-2">提交</button>
+                </form>
+              </div>
+            </div>
+        </div>
         </div>
       </div>
     </div>

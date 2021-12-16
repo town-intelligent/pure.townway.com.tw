@@ -1,109 +1,132 @@
-function draw_associate_did(baseNodes, baseLinks)
-{
-  var str_list_tasks = getCookie("list_tasks");
-  if (str_list_tasks === "") {
-    // Redirect to issue page
-    window.location.replace("/issues.html");
-  }
+function reDrawChart(projectWeight) {
+    var svg = d3.select("svg"),
+        margin = 200,
+        width = svg.attr("width") - margin,
+        height = svg.attr("height") - margin
 
-  var list_tasks = str_list_tasks.split(",");
-  var new_personal_node = [];
-  for (var index = 0; index < list_tasks.length; index++) {
+    svg.append("text")
+       .attr("transform", "translate(100,0)")
+       .attr("x", 50)
+       .attr("y", 50)
+       .attr("font-size", "24px")
+       .text("年度志工時數")
+
+    var xScale = d3.scaleBand().range([0, width]).padding(0.4),
+        yScale = d3.scaleLinear().range([height, 0]);
+
+    var g = svg.append("g")
+               .attr("transform", "translate(" + 100 + "," + 100 + ")");
+
+    d3.csv("/static/delme/XYZ.csv", function(error, data) {
+        if (error) {
+            throw error;
+        }
+
+	console.log("data = " + JSON.stringify(data));
+	data = JSON.parse(getCookie("project_weight"));
+
+        xScale.domain(data.map(function(d) { return d.month; }));
+        yScale.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+        g.append("g")
+         .attr("transform", "translate(0," + height + ")")
+         .call(d3.axisBottom(xScale))
+         .append("text")
+         .attr("y", height - 250)
+         .attr("x", width - 100)
+         .attr("text-anchor", "end")
+         .attr("stroke", "black")
+         .text("月份");
+
+        g.append("g")
+         .call(d3.axisLeft(yScale).tickFormat(function(d){
+             return d;
+         })
+         .ticks(10))
+         .append("text")
+         .attr("transform", "rotate(-90)")
+         .attr("y", 6)
+         .attr("dy", "-5.1em")
+         .attr("text-anchor", "end")
+         .attr("stroke", "black")
+         .text("時數");
+
+        g.selectAll(".bar")
+         .data(data)
+         .enter().append("rect")
+         .attr("class", "bar")
+         .attr("x", function(d) { return xScale(d.month); })
+         .attr("y", function(d) { return yScale(d.value); })
+         .attr("width", xScale.bandwidth())
+         .attr("height", function(d) { 
+		 console.log("hello, height = " + height);
+		 console.log("hello, d.value = " + d.value);
+		 console.log("hello, yScale(d.value) = " + yScale(d.value));
+
+		 return height - yScale(d.value); 
+	 });
+    });
+}
+
+function getProjectWeight(list_task_UUIDs) {
+  var projectWeight = {};
+  var dataJSON = {};
+  dataJSON.uuid = list_task_UUIDs[0];
+
+  $.ajax({
+    url: "https://tplanet-backend.townway.com.tw/projects/weight",
+    type: "POST",
+    async: false,
+    crossDomain: true,
+    data: dataJSON,
+    success: function(returnData) {
+       const obj = JSON.parse(returnData);
+       // Set project weight to cookie
+       setCookie("project_weight", returnData, 1);
+       projectWeight = obj;
+    },
+    error: function(xhr, ajaxOptions, thrownError){
+      console.log(thrownError);
+    }
+  });
+
+  return projectWeight;
+}
+
+function updateTalbeData(list_task_UUIDs) {
+  // table_summary
+  var tbodyRef = document.getElementById("table_summary").getElementsByTagName("tbody")[0];
+  for (var index = 0; index < list_task_UUIDs.length; index ++) {
     // Get task info
-    obj = JSON.parse(getCookie(list_tasks[index]));
+    if (getCookie(list_task_UUIDs[index]) === "") {
+      continue;
+    }
+    var obj = JSON.parse(getCookie(list_task_UUIDs[index]));
+
+    // Insert a row at the end of table
+    var newRow = tbodyRef.insertRow();
+
+    // Insert a cell at the end of the row
+    var newCell_task_name = newRow.insertCell();
+    var newText_task_name = document.createTextNode(obj.name);
+    newCell_task_name.appendChild(newText_task_name);
     
-    for (var index_sdgs = 1; index_sdgs < 18; index_sdgs++) {
-      if (obj.ticket["s" + index_sdgs] != "0") {
-        // { id: "personal"   , group: 18, label: "personal"   , level: 4 },
-        var obj_personal = {};
-        obj_personal.id = "personal-" + index.toString() + index_sdgs.toString();
-        obj_personal.group = 18;
-        obj_personal.label = "個人";
-        obj_personal.level = 4;
-        baseNodes.push(obj_personal);
-
-	var obj_new_node = {}
-	obj_new_node.nodeid = obj_personal.id;
-	obj_new_node.source = index_sdgs;
-	new_personal_node.push(obj_new_node);
-      }
-    }
-  }
-  
-  // Adding nodes: project
-  task_ticket_submit(list_tasks, 0);
-  var obj_project_weight = JSON.parse(getCookie("project_weight"));
-  var new_project_node = [];
-  for (var index = 1; index < 18; index++) {
-    if (obj_project_weight["sdgs-" + index] != "0") {
-	// Add nodes
-	for (var index_nodes_counts = 0; index_nodes_counts < parseInt(obj_project_weight["sdgs-" + index]); index_nodes_counts++) {
-          // { id: "cumulative"   , group: 19, label: "專案"   , level: 4 },
-          var obj_project = {};
-          obj_project.id = "cumulative-" + index.toString() + index_nodes_counts.toString();
-          obj_project.group = 19;
-          obj_project.label = "專案";
-          obj_project.level = 4;
-          baseNodes.push(obj_project);
-
-          var obj_new_node = {}
-          obj_new_node.nodeid = obj_project.id;
-          obj_new_node.source = index;
-          new_project_node.push(obj_new_node);
-	}
-    }
-  }
-
-  // Updating links
-  // { target: "SDG-1", source: "C" , strength: 0.5 }, 
-  for (var index = 0; index < new_personal_node.length; index++) {
-    obj = new_personal_node[index];
-
-    var obj_personal = {};
-    obj_personal.target = obj.nodeid ;
-    obj_personal.source = "SDG-" + obj.source.toString();
-    obj_personal.strength = 0.5;
-    baseLinks.push(obj_personal);
-  }
-
-  for (var index = 0; index < new_project_node.length; index++) {
-    obj = new_project_node[index];
-
-    var obj_project = {};
-    obj_project.target = obj.nodeid ;
-    obj_project.source = "SDG-" + obj.source.toString();
-    obj_project.strength = 0.5;
-    baseLinks.push(obj_project);
-  }
-  return [baseNodes, baseLinks];
-}
-
-function set_page_info(total_weight, list_task_uuid) {
-  for (var index = 1; index < 18; index ++) {
-    document.getElementById("project_s" + index).innerHTML = total_weight["sdgs-" + index];
-
-    for (var index_task = 0; index_task < list_task_uuid.length;  index_task++) {
-      obj = JSON.parse(getCookie(list_task_uuid[index_task]));
-      document.getElementById("persion_s" + index).innerHTML = (parseInt(document.getElementById("persion_s" + index).innerHTML) + parseInt(obj.ticket["s" + index ]) ).toString();
-    }
+    var newCell2 = newRow.insertCell();
+    var newText2 = document.createTextNode(obj.token);
+    newCell2.appendChild(newText2);
   }
 }
 
-function task_ticket_submit(uuid_task, set_page = 1) {
-  if (getCookie(uuid_task[0]) === "") {
-    for (var index = 0; index < uuid_task.length; index++) {
-      get_task_info(uuid_task[index], 0);
-    }
+function submitTaskTickets(task_UUID) {
+  if (getCookie(task_UUID)=== "") {
+    return;
   }
+  obj = JSON.parse(getCookie(task_UUID));
+  var taskWeight = {};
+  var dataJSON = {};
+  dataJSON.uuid = obj.uuid;
+  dataJSON.token = obj.token;
 
-  obj = JSON.parse(getCookie(uuid_task[0]));
-  var dataJSON = {"uuid": uuid_task[0],"sdgs-1":obj.ticket.s1,"sdgs-2":obj.ticket.s2,
-	  "sdgs-3":obj.ticket.s3,"sdgs-4":obj.ticket.s4,"sdgs-5":obj.ticket.s5,
-	  "sdgs-6":obj.ticket.s6,"sdgs-7":obj.ticket.s7,"sdgs-8":obj.ticket.s8,
-	  "sdgs-9":obj.ticket.s9,"sdgs-10":obj.ticket.s10,"sdgs-11":obj.ticket.s11,
-	  "sdgs-12":obj.ticket.s12,"sdgs-13":obj.ticket.s13,"sdgs-14":obj.ticket.s14,
-	  "sdgs-15":obj.ticket.s15,"sdgs-16":obj.ticket.s16,"sdgs-17":obj.ticket.s17};
-   
   $.ajax({
     url: "https://tplanet-backend.townway.com.tw/tasks/submit",
     type: "POST",
@@ -114,35 +137,51 @@ function task_ticket_submit(uuid_task, set_page = 1) {
        const obj = JSON.parse(returnData);
        // Set project weight to cookie
        setCookie("project_weight", returnData, 1);
-
-       // Set page info
-       if (set_page === 1) {
-         set_page_info(obj, uuid_task);
-       }
+       taskWeight = obj;
     },
     error: function(xhr, ajaxOptions, thrownError){
       console.log(thrownError);
     }
   });
+
+  return taskWeight;
 }
 
-function submit_weight() {
-  var list_issues = [];
-  var dataJSON = {};
-  dataJSON.username = getCookie("username");
-  $.ajax({
-    url: "https://eid-backend.townway.com.tw/tasks/list",
-    type: "POST",
-    async: false,
-    crossDomain: true,
-    data:  dataJSON,
-    success: function(returnData) {
-       const obj = JSON.parse(returnData);
-       // Submit ticket
-       task_ticket_submit(obj.uuid);
-    },
-    error: function(xhr, ajaxOptions, thrownError){
-      console.log(thrownError);
+function detectNoNeedSubmitTask(list_task_UUIDs) {
+  for (var index = 0; index < list_task_UUIDs.length; index ++) {
+    // FIXME: Should be type, not uuid
+    if (list_task_UUIDs[index] === "00000007") {
+        list_task_UUIDs.splice(index, 1);
     }
-  });
+  }
+
+  return list_task_UUIDs;
+}
+
+function updateNodeData() {
+  // Get user tasks
+  var str_list_task_UUIDs = getCookie("list_tasks");
+  var list_task_UUIDs  = [];
+  if (str_list_task_UUIDs === "") {
+    // Get user task UUIDs
+    list_task_UUIDs = list_tasks(getCookie("username"));
+    setCookie("list_tasks", list_task_UUIDs, 1);
+  } else {
+    list_task_UUIDs = str_list_task_UUIDs.split(",");
+  }
+
+  // Remove no need submit task
+  list_task_UUIDs = detectNoNeedSubmitTask(list_task_UUIDs);
+
+  // Submit all tasks
+  for (var index = 0; index < list_task_UUIDs.length; index ++) {
+    submitTaskTickets(list_task_UUIDs[index]);
+  }
+
+  // Update Table data
+  updateTalbeData(list_task_UUIDs);
+
+  // reDraw Chart
+  var projectWeight = getProjectWeight(list_task_UUIDs);
+  reDrawChart(projectWeight);
 }

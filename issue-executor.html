@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,15 +17,22 @@
     <script src="static/js/issues.js"></script>
     <script src="static/js/set-page-info.js"></script>
     <script src="static/js/init.js"></script>
+    <script>
+      function issues(project_id) {
+        setCookie("project_id", project_id, 1);
+        window.location.replace("/issues-1.html");
+      }
+    </script>
   </head>
 
   <body onload="init();">
-    <div class="container-fluid border border-warning border-width-lg min-vh-100">
+    <div class="container-fluid border border-secondary border-width-lg min-vh-100">
       <div class="row">
         <div class="col">
           <nav class="navbar navbar-expand-sm navbar-light bg-white align-items-center px-0">
-            <a class="navbar-brand mr-0" href="index.html">
-              <img class="logo-md" src="static/imgs/eID-logo.png">
+            <a class="navbar-brand mr-3" href="index.html">
+              <img class="mr-1 logo-isu" src="static/imgs/eID-logo.png">
+              <img class="logo-isu" src="static/imgs/ISU logo-s.png">
             </a>
               <ul class="nav nav-tabs w-100 mr-3">
                 <li class="nav-item">
@@ -39,14 +45,32 @@
                   <a class="nav-link" href="/foot_print.html">數位足跡</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/wallet.html">錢包</a>
+                  <a class="nav-link" href="/wallet.html">領取任務</a>
                 </li>
               </ul>
               <a class="navbar-brand mr-0" href="#">
                 <img style="width: 45px"src="static/imgs/user-edit-solid.svg">
               </a>
           </nav>
-          <div class="container" id="summary">
+
+          <div class="row mt-2" id="issues-list">
+            <div class="col-12">
+              <div class="card">
+                <p class="p-3 mb-0">
+                  志工任務說明志工任務說明志工任務說明志工任務說明志工任務說明志工任務說明
+                  志工任務說明志工任務說明志工任務說明志工任務說明志工任務說明志工任務說明
+                  志工任務說明志工任務說明志工任務說明志工任務說明志工任務說明志工任務說明
+                  志工任務說明志工任務說明志工任務說明志工任務說明志工任務說明志工任務說明
+                  志工任務說明志工任務說明志工任務說明志工任務說明志工任務說明志工任務說明
+                </p>
+              </div>
+              <button id="btn_finish_task" type="button" class="btn btn-primary mt-2" onclick="finish_task()">完成任務</button>
+            </div>
+            <div id="task_summary" class="col-12 mt-2">
+              <label class="text-danger fz-s" for="" style="display: inline">您已完成志工任務:</label> <label id="task_name" class="text-danger fz-s" for=""></label>
+	      <label class="text-danger fz-s" for="" style="display: inline">，可獲得志工時數:</label> <label id="task_balance" class="text-danger fz-s" for=""></label>
+              <span class="text-danger fz-s">小時。感謝您對社區的貢獻，也請持續參與，謝謝!</span>
+            </div>
           </div>
         </div>
       </div>
