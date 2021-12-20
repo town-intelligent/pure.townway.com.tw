@@ -84,5 +84,8 @@ function setPageInfo() {
     
   } else if (page == "wallet.html") {
     $("#nav-wallet").addClass("active");
+  } else if (page == "edit-info.html") {
+    document.getElementById("email").innerHTML = getCookie("email");
+    document.getElementById("username").value = getCookie("username");
   }
 }
