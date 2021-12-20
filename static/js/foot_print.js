@@ -35,7 +35,7 @@ function reDrawChart(projectWeight) {
          .attr("y", height - 250)
          .attr("x", width - 100)
          .attr("text-anchor", "end")
-         .attr("stroke", "black")
+         .attr("stroke", "blue")
          .text("月份");
 
         g.append("g")
@@ -48,7 +48,7 @@ function reDrawChart(projectWeight) {
          .attr("y", 6)
          .attr("dy", "-5.1em")
          .attr("text-anchor", "end")
-         .attr("stroke", "black")
+         .attr("stroke", "green")
          .text("時數");
 
         g.selectAll(".bar")
