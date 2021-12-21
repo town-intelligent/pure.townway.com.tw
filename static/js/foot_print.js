@@ -74,7 +74,7 @@ function getProjectWeight(list_task_UUIDs) {
   dataJSON.uuid = list_task_UUIDs[0];
 
   $.ajax({
-    url: "https://tplanet-backend.townway.com.tw/projects/weight",
+    url: HOST_URL_TPLANET_DAEMON + "/projects/weight",
     type: "POST",
     async: false,
     crossDomain: true,
@@ -128,7 +128,7 @@ function submitTaskTickets(task_UUID) {
   dataJSON.token = obj.token;
 
   $.ajax({
-    url: "https://tplanet-backend.townway.com.tw/tasks/submit",
+    url: HOST_URL_TPLANET_DAEMON + "/tasks/submit",
     type: "POST",
     async: false,
     crossDomain: true,

@@ -1,4 +1,4 @@
 # eid-web
 
-## Demo-site
-- http://pure.townway.com.tw/
+## URL
+- https://pure.townway.com.tw/

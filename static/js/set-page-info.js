@@ -2,15 +2,12 @@ function setInfoEid() {
   // Set username
   $("#userid").text(getCookie("username"));
 
- // var balance = document.getElementById("balance");
- // balance.innerHTML = "30";
-
   // Set balance
   var dataJSON = {};
   dataJSON.email = getCookie("email");
   dataJSON.ec = 0;
   $.ajax({
-    url: "https://eid-backend.townway.com.tw/accounts/balance",
+    url: HOST_URL_EID_DAEMON + "/accounts/balance",
     type: "POST",
     async: false,
     crossDomain: true,
