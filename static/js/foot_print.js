@@ -99,7 +99,7 @@ function updateTalbeData(list_task_UUIDs) {
   for (var index = 0; index < list_task_UUIDs.length; index ++) {
     // Get task info
     if (getCookie(list_task_UUIDs[index]) === "") {
-      continue;
+      get_task_info(list_task_UUIDs[index], 0);
     }
     var obj = JSON.parse(getCookie(list_task_UUIDs[index]));
 
