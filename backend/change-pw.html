@@ -35,7 +35,6 @@
 	// Submit
 	var dataJSON = {};
         dataJSON.password =  $("#password2").val();
-        dataJSON.username = ""; 
         dataJSON.email = getCookie("email"); 
         $.ajax({
           url: HOST_URL_EID_DAEMON + "/accounts/modify",

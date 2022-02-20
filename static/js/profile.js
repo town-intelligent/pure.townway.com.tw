@@ -5,7 +5,6 @@ function edit_username() {
   var dataJSON = {};
   dataJSON.email = getCookie("email");
   dataJSON.username = username;
-  dataJSON.password = "";
   $.ajax({
     url: HOST_URL_EID_DAEMON + "/accounts/modify",
     type: "POST",
@@ -46,6 +45,25 @@ function logout() {
   });
 }
 
-function change_avatar_img() {
-  console.log("change_avatar_img");
+function getAvatarImg() {
+  // Modify account
+  var dataJSON = {};
+  dataJSON.email = getCookie("email");
+  $.ajax({
+    url: HOST_URL_EID_DAEMON + "/accounts/get_avatar_img",
+    type: "POST",
+    async: false,
+    crossDomain: true,
+    data:  dataJSON,
+    success: function(returnData) {
+       const obj = JSON.parse(returnData);
+       // Reset Cookie
+       setCookie("avatar_img", obj.url)
+    },
+    error: function(xhr, ajaxOptions, thrownError){
+      console.log(thrownError);
+    }
+  });
+
+  return "OK"
 }

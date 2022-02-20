@@ -19,6 +19,69 @@
     <script src="../static/js/profile.js"></script>
     <script src="../static/js/set-page-info.js"></script>
     <script src="../static/js/init.js"></script>
+    <script>
+      // http://jsfiddle.net/DerekL/3wRpA/
+      // https://stackoverflow.com/questions/53651409/writing-a-base64-string-to-file-in-python-not-working
+      // https://stackoverflow.com/questions/34116682/save-base64-image-python
+      /*The FileModal Class*/
+      function FileModal(accept){
+        var callback = function(){};
+        return {
+	  show: function(){
+	    $("<input>").attr({
+	      type: "file",
+	      accept: accept
+            }).appendTo("body").hide().change(function(e){
+	      var file = e.target.files[0],
+	      reader = new FileReader();
+	      reader.onload = function(progress){
+	        callback(progress.target.result);
+	      };
+	    reader.readAsDataURL(file);
+	    }).click();
+	  },
+	  set onload(c){ callback = c; }
+	}
+      }
+
+      // --- --- ---
+
+      function uploadAvatarImg(base64Img) {
+        var dataJSON = {};
+	dataJSON.email = getCookie("email");
+        dataJSON.img = base64Img;
+        $.ajax({
+          url: HOST_URL_EID_DAEMON + "/accounts/modify",
+          type: "POST",
+          async: false,
+          crossDomain: true,
+          data:  dataJSON,
+          success: function(returnData) {
+            const obj = JSON.parse(returnData);
+            if (obj.result) {
+              console.log("OK");
+            } else {
+              console.log("False");
+            }
+            window.location.replace("/eid.html");
+          },
+          error: function(xhr, ajaxOptions, thrownError){
+            console.log(thrownError);
+          }
+        });
+      }
+
+      // --- --- ---
+
+      function changeAvatarImg1() {
+        var file = new FileModal("image/png");
+        file.onload = function(d){
+	  // Upload base64 image file
+	  uploadAvatarImg(d);
+        };
+        file.show();
+      }
+    </script>
   </head>
 
   <body onload="init();">
@@ -32,7 +95,7 @@
             </a>
               <a class="navbar-brand mr-0 ml-auto" href="/backend/edit-info.html">
                 <img style="width: 45px"src="../static/imgs/user-edit-solid.svg">
-              </a>
+	      </a>
           </nav>
           <div class="container">
               <div class="row mt-5 align-items-center">
@@ -69,9 +132,10 @@
                 </div>
                 <div class="col-5">
                   <div class="card">
-                    <div id="avatar_img" class="bg-contain" style="background-image: url(../static/imgs/pages/user.png); height: 170px; background-repeat: no-repeat" onclick="change_avatar_img(this.files)"></div>
+	            <button id="btn_avatar_img" onclick="changeAvatarImg1()"><div id="avatar_img" class="bg-contain" style="background-image: url(../static/imgs/pages/user.png); height: 170px; background-repeat: no-repeat" ></div></button>
                   </div>
                 </div>
+              </div>
               </div>
           </div>
         </div>
