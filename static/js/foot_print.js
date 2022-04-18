@@ -173,7 +173,7 @@ function updateNodeData() {
   // Remove no need submit task
   list_task_UUIDs = detectNoNeedSubmitTask(list_task_UUIDs);
 
-  // FIXME: Don't add any weight on this page
+  // Don't add any weight on this page
   // Submit all tasks
   // for (var index = 0; index < list_task_UUIDs.length; index ++) {
   //  submitTaskTickets(list_task_UUIDs[index]);
