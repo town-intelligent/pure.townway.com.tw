@@ -23,7 +23,7 @@ function reDrawChart(projectWeight) {
         }
 
 	console.log("data = " + JSON.stringify(data));
-	data = JSON.parse(getCookie("project_weight"));
+	data = JSON.parse(getLocalStorage("project_weight"));
 
         xScale.domain(data.map(function(d) { return d.month; }));
         yScale.domain([0, d3.max(data, function(d) { return d.value; })]);
@@ -81,8 +81,8 @@ function getProjectWeight(list_task_UUIDs) {
     data: dataJSON,
     success: function(returnData) {
        const obj = JSON.parse(returnData);
-       // Set project weight to cookie
-       setCookie("project_weight", returnData, 1);
+       // Set project weight to localStorage
+       setLocalStorage("project_weight", returnData);
        projectWeight = obj;
     },
     error: function(xhr, ajaxOptions, thrownError){
@@ -98,10 +98,10 @@ function updateTalbeData(list_task_UUIDs) {
   var tbodyRef = document.getElementById("table_summary").getElementsByTagName("tbody")[0];
   for (var index = 0; index < list_task_UUIDs.length; index ++) {
     // Get task info
-    if (getCookie(list_task_UUIDs[index]) === "") {
+    if (getLocalStorage(list_task_UUIDs[index]) === "") {
       get_task_info(list_task_UUIDs[index], 0);
     }
-    var obj = JSON.parse(getCookie(list_task_UUIDs[index]));
+    var obj = JSON.parse(getLocalStorage(list_task_UUIDs[index]));
 
     // Insert a row at the end of table
     var newRow = tbodyRef.insertRow();
@@ -118,10 +118,10 @@ function updateTalbeData(list_task_UUIDs) {
 }
 
 function submitTaskTickets(task_UUID) {
-  if (getCookie(task_UUID)=== "") {
+  if (getLocalStorage(task_UUID)=== "") {
     return;
   }
-  obj = JSON.parse(getCookie(task_UUID));
+  obj = JSON.parse(getLocalStorage(task_UUID));
   var taskWeight = {};
   var dataJSON = {};
   dataJSON.uuid = obj.uuid;
@@ -135,8 +135,8 @@ function submitTaskTickets(task_UUID) {
     data: dataJSON,
     success: function(returnData) {
        const obj = JSON.parse(returnData);
-       // Set project weight to cookie
-       setCookie("project_weight", returnData, 1);
+       // Set project weight to localStorage
+       setLocalStorage("project_weight", returnData);
        taskWeight = obj;
     },
     error: function(xhr, ajaxOptions, thrownError){
@@ -160,12 +160,12 @@ function detectNoNeedSubmitTask(list_task_UUIDs) {
 
 function updateNodeData() {
   // Get user tasks
-  var str_list_task_UUIDs = getCookie("list_tasks");
+  var str_list_task_UUIDs = getLocalStorage("list_tasks");
   var list_task_UUIDs  = [];
   if (str_list_task_UUIDs === "") {
     // Get user task UUIDs
-    list_task_UUIDs = list_tasks(getCookie("username"));
-    setCookie("list_tasks", list_task_UUIDs, 1);
+    list_task_UUIDs = list_tasks(getLocalStorage("username"));
+    setLocalStorage("list_tasks", list_task_UUIDs);
   } else {
     list_task_UUIDs = str_list_task_UUIDs.split(",");
   }

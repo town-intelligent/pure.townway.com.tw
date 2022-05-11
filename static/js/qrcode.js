@@ -6,7 +6,7 @@ function get_task(url) {
   var url_task_save = HOST_URL_EID_DAEMON + "/tasks/save";
 
   var dataJSON = {};
-  dataJSON.username = getCookie("username");
+  dataJSON.username = getLocalStorage("username");
   dataJSON.uuid = uuid_task;
   console.log("hello, uuid_task = " + uuid_task);
 
