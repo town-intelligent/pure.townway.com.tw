@@ -67,3 +67,7 @@ background-position: center center;
 .icon-sm {
   width: 5%;
 }
+
+.qr-code-width{
+  width: 110px;
+}
