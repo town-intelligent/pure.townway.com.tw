@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link href="static/css/style.css" rel="stylesheet" type="text/css">
+  </head>
+  <script>
+    function checkBoxFn() {
+      let otherCheck = document.getElementById("otherCheck");
+      let textArea = document.getElementById("textArea");
+      if (otherCheck.checked === true){
+        textArea.style.display = "block";
+      } else {
+        textArea.style.display = "none";
+      }
+    }
+    // set_description
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.addEventListener("click", async function(){ 
+      const form = new FormData();
+      const url = `${HOST_URL_EID_DAEMON}/accounts/set_description`;
+      
+      form.append("email", "200@gmail.com");
+      form.append("description", "{\"hhhhhhh\":[0,1,0,1]}");
+      
+      await setDescription(url, form);
+    });
+
+    async function setDescription(url, data){
+      try {
+        const res = await axios.post(url, data);
+        console.log(res);
+        // alert(`${res.data.username}您好，您已登入成功！`);
+        // emailInput.value = '';
+        // passwordInput.value = '';
+        // renderData(res);
+      } catch (error) {
+        console.error(error);
+        // alert('登入失敗，請輸入正確的 Email 或密碼！')
+      }
+    }
+  
+  </script>
+
+  <body>
+    <div class="container-fluid border border-secondary border-width-lg min-vh-100">
+      <div class="row">
+        <div class="col">
+          <nav class="navbar navbar-expand-sm navbar-light bg-white align-items-center px-0">
+            <a class="navbar-brand mr-3" href="index.html">
+              <img class="mr-1 logo-isu" src="static/imgs/eID-logo.png">
+                <img class="logo-isu" src="static/imgs/ISU logo-s.png">
+            </a>
+              <a class="navbar-brand mr-0 ml-auto" href="#" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                <img style="width: 45px"src="static/imgs/user-edit-solid.svg">
+              </a>
+              <div class="dropdown-menu dropdown-menu-center">
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <img src="static/imgs/personal_info.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
+                  <span class="pl-2">基本資料</span>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <img src="static/imgs/eID.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
+                  <span class="pl-2">數位身分證</span>
+                </a>
+              </div>
+          </nav>
+        </div>
+      </div>
+      <section>
+        <div class="container-fluid px-0">
+          <form action="">
+            <div class="row mt-4">
+              <div class="col-sm-6">
+                <div class="border d-flex align-items-center justify-content-center h-100">
+                  <img src="static/imgs/person_icon.svg" height="265" alt="">
+                  <a href="#" class="stretched-link"></a>
+                </div>
+              </div>
+              <div class="col-sm-6 mt-4 mt-sm-0">
+                <p>使用者名稱</p>
+                <div class="d-flex">
+                  <input type="text" class="form-control" placeholder="請輸入使用者名稱">
+                  <button class="btn btn-primary text-nowrap ml-2">確認</button>
+                </div>
+                <p class="mt-3">電子郵件</p>
+                <input type="text" class="form-control" placeholder="請輸入電子郵件">
+                <p class="mt-3">密碼</p>
+                <div class="d-flex">
+                  <input type="text" class="form-control" placeholder="請輸入密碼">
+                  <button class="btn btn-primary text-nowrap ml-2">編輯</button>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4 justify-content-center">
+              <div class="col-sm-6">
+                <p>身分識別</p>
+                <p class="mb-0">A.志工</p>
+              </div>
+              <div class="col-sm-6 mt-4 mt-sm-0">
+                <p>時數</p>
+                <div class="d-flex align-items-center">
+                  <span>200</span>
+                  <span class="ml-2 text-nowrap">小時</span>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4 align-items-center justify-content-center">
+              <div class="col">
+                <p>專長</p>
+                <div class="form-row">
+                  <div class="form-group col-sm-3">
+                    <div class="form-check d-flex align-items-center">
+                      <input class="form-check-input checkbox-1x" type="checkbox" id="gridCheck1">
+                      <label class="form-check-label pl-3" for="gridCheck1">
+                        1. 行政支援
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <div class="form-check d-flex align-items-center">
+                      <input class="form-check-input checkbox-1x" type="checkbox" id="gridCheck2">
+                      <label class="form-check-label pl-3" for="gridCheck2">
+                        2. 課業輔導
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <div class="form-check d-flex align-items-center">
+                      <input class="form-check-input checkbox-1x" type="checkbox" id="gridCheck3">
+                      <label class="form-check-label pl-3" for="gridCheck3">
+                        3. 社區服務
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <div class="form-check d-flex align-items-center">
+                      <input class="form-check-input checkbox-1x" type="checkbox" id="gridCheck4">
+                      <label class="form-check-label pl-3" for="gridCheck4">
+                        4. 生活扶助
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <div class="form-check d-flex align-items-center">
+                      <input class="form-check-input checkbox-1x" type="checkbox" id="gridCheck5">
+                      <label class="form-check-label pl-3" for="gridCheck5">
+                        5. 電腦科技
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <div class="form-check d-flex align-items-center">
+                      <input class="form-check-input checkbox-1x" type="checkbox" id="gridCheck6">
+                      <label class="form-check-label pl-3" for="gridCheck6">
+                        6. 環保教育
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <div class="form-check d-flex align-items-center">
+                      <input class="form-check-input checkbox-1x" type="checkbox" id="gridCheck7">
+                      <label class="form-check-label pl-3" for="gridCheck7">
+                        7. 藝術文化
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <div class="form-check d-flex align-items-center">
+                      <input class="form-check-input checkbox-1x" type="checkbox" id="gridCheck8">
+                      <label class="form-check-label pl-3" for="gridCheck8">
+                        8. 健康醫療
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <div class="form-check d-flex align-items-center">
+                      <input class="form-check-input checkbox-1x" type="checkbox" id="gridCheck9">
+                      <label class="form-check-label pl-3" for="gridCheck9">
+                        9. 權益倡導
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <div class="form-check d-flex align-items-center">
+                      <input class="form-check-input checkbox-1x" type="checkbox" id="gridCheck10">
+                      <label class="form-check-label pl-3" for="gridCheck10">
+                        10. 國際交流
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <div class="form-check d-flex align-items-center">
+                      <input class="form-check-input checkbox-1x" type="checkbox" id="otherCheck" onclick="checkBoxFn()">
+                      <label class="form-check-label pl-3" for="otherCheck">
+                        11. 其他
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group col-12">
+                    <textarea class="form-control" id="textArea" rows="6" style="display: none;"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row my-4">
+              <div class="col-12">
+                <div class="d-flex justify-content-center">
+                  <button class="btn btn-primary d-none d-sm-block" style="width: 15%" id="submitBtn">儲存</button>
+                  <!-- <button class="btn btn-primary d-sm-none" style="width: 30%" id="submitBtn">儲存</button> -->
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </body>
+</html>
