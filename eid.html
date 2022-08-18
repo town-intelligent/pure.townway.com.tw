@@ -23,65 +23,8 @@
     <script src="static/js/profile.js"></script>
     <script src="static/js/set-page-info.js"></script>
     <script src="static/js/init.js"></script>
+    <script src="static/js/getGroup.js"></script>
   </head>
-  <script>
-    const form = new FormData();
-    const userEmail = getLocalStorage('email');
-    const dataJason = {};
-    form.append("email", userEmail);
-
-    let settings = {
-      "url": `${HOST_URL_EID_DAEMON}/accounts/get_group`,
-      "method": "POST",
-      "timeout": 0,
-      "processData": false,
-      "mimeType": "multipart/form-data",
-      "contentType": false,
-      "data": form
-    };
-
-    $.ajax(settings).done(async function (res) {
-      const obj = JSON.parse(res);
-      await getGroup(obj)
-    });
-
-    function getGroup(data){
-      const Dropdown = document.getElementById('dropdown');
-      if(data.group === '300'){
-        Dropdown.innerHTML=`
-        <a class="dropdown-item d-flex align-items-center" href="/backend/edit-info.html">
-          <img src="static/imgs/personal_info.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
-          <span class="pl-2">基本資料</span>
-        </a>
-        <a class="dropdown-item d-flex align-items-center" href="/eid.html">
-          <img src="static/imgs/eID.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
-          <span class="pl-2">數位身分證</span>
-        </a>`;
-      }else if(data.group === '201'){
-        Dropdown.innerHTML=`
-        <a class="dropdown-item d-flex align-items-center" href="/backend/edit-info.html">
-          <img src="static/imgs/personal_info.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
-          <span class="pl-2">基本資料</span>
-        </a>
-        <a class="dropdown-item d-flex align-items-center" href="/eid.html">
-          <img src="static/imgs/eID.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
-          <span class="pl-2">數位身分證</span>
-        </a>
-        <a class="dropdown-item d-flex align-items-center" href="#">
-          <img src="static/imgs/cooperate.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
-          <span class="pl-2">永續合作</span>
-        </a>
-        <a class="dropdown-item d-flex align-items-center" href="#">
-          <img src="static/imgs/groups.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
-          <span class="pl-2">志工專區</span>
-        </a>
-        `
-      }
-    }
-    
-
-  </script>
-
   <body onload="init();">
     <div class="container-fluid border border-secondary border-width-lg min-vh-100">
       <div class="row">
