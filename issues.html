@@ -18,6 +18,7 @@
     <script src="static/js/issues.js"></script>
     <script src="static/js/set-page-info.js"></script>
     <script src="static/js/init.js"></script>
+    <script src="static/js/getGroup.js"></script>
     <script>
       function issues(project_id) {
         setLocalStorage("project_id", project_id);
@@ -30,31 +31,113 @@
     <div class="container-fluid border border-secondary border-width-lg min-vh-100">
       <div class="row">
         <div class="col">
-          <nav class="navbar navbar-expand-sm navbar-light bg-white align-items-center px-0">
-            <a class="navbar-brand mr-0" href="index.html">
+          <nav class="navbar navbar-expand-sm navbar-light bg-white align-items-start align-items-sm-center px-0">
+            <a class="navbar-brand mr-sm-3" href="index.html">
               <img class="mr-1 logo-isu" src="static/imgs/eID-logo.png">
               <img class="logo-isu" src="static/imgs/ISU logo-s.png">
-	    </a>
-              <ul class="nav nav-tabs w-100 mr-3">
+            </a>
+            <a class="navbar-brand mr-0 ml-auto d-sm-none" href="#" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+              <img style="width: 45px"src="static/imgs/user-edit-solid.svg">
+            </a>
+              <ul class="nav nav-tabs w-100 mr-sm-3 mt-3 mt-sm-0">
                 <li class="nav-item">
-                  <a class="nav-link" href="/eid.html">身分證</a>
+                  <a class="nav-link px-2 px-sm-3" href="/eid.html">身分證</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" href="/issues.html">永續合作</a>
+                  <a class="nav-link px-2 active px-sm-3" href="/issues.html">永續合作</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/foot_print.html">數位足跡</a>
+                  <a class="nav-link px-2 px-sm-3" href="/foot_print.html">數位足跡</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/wallet.html">領取任務</a>
+                  <a class="nav-link px-2 px-sm-3" href="/wallet.html">領取任務</a>
                 </li>
               </ul>
-              <a class="navbar-brand mr-0" href="/backend/edit-info.html">
+              <a class="navbar-brand mr-0 ml-auto d-none d-sm-block" href="#" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                 <img style="width: 45px"src="static/imgs/user-edit-solid.svg">
               </a>
+              <div class="dropdown-menu dropdown-menu-right" id="dropdown">
+              </div>
           </nav>
-          
-          <div class="row mt-5" id="issues-list">
+          <div class="d-sm-none">
+            <div class="row justify-content-center my-3">
+              <div class="col-10">
+                <div class="card">
+                  <div class="card-header bg-white p-0">
+                    <a href="index.html" class="d-block">
+                      <div class="bg-cover" style="background-image: url(static/imgs/Task-1.jpg); height: 150px; background-repeat: no-repeat" ></div>
+                    </a>
+                  </div>
+                  <div class="card-body p-2">
+                    <p class="card-text">除草</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-10 mt-3">
+                <div class="card">
+                  <div class="card-header bg-white p-0">
+                    <a href="index.html" class="d-block">
+                      <div class="bg-cover" style="background-image: url(static/imgs/Task-2.jpg); height: 150px; background-repeat: no-repeat" ></div>
+                    </a>
+                  </div>
+                  <div class="card-body p-2">
+                    <p class="card-text">支援活動</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-10 mt-3">
+                <div class="card">
+                  <div class="card-header bg-white p-0">
+                    <a href="index.html" class="d-block">
+                      <div class="bg-cover" style="background-image: url(static/imgs/Task-3.jpg); height: 150px; background-repeat: no-repeat" ></div>
+                    </a>
+                  </div>
+                  <div class="card-body p-2">
+                    <p class="card-text">課輔協助</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-none d-sm-block">
+            <div class="row mt-2 h-100 align-items-center">
+              <div class="col-sm-4">
+                <div class="card">
+                  <div class="card-header bg-white p-0">
+                    <a href="index.html" class="d-block">
+                      <div class="bg-cover" style="background-image: url(static/imgs/Task-1.jpg); height: 150px; background-repeat: no-repeat" ></div>
+                    </a>
+                  </div>
+                  <div class="card-body p-2">
+                    <p class="card-text">除草</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card">
+                  <div class="card-header bg-white p-0">
+                    <a href="index.html" class="d-block">
+                      <div class="bg-cover" style="background-image: url(static/imgs/Task-2.jpg); height: 150px; background-repeat: no-repeat" ></div>
+                    </a>
+                  </div>
+                  <div class="card-body p-2">
+                    <p class="card-text">支援活動</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card">
+                  <div class="card-header bg-white p-0">
+                    <a href="index.html" class="d-block">
+                      <div class="bg-cover" style="background-image: url(static/imgs/Task-3.jpg); height: 150px; background-repeat: no-repeat" ></div>
+                    </a>
+                  </div>
+                  <div class="card-body p-2">
+                    <p class="card-text">課輔協助</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
