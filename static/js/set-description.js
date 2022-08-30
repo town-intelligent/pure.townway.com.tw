@@ -10,20 +10,20 @@ function checkBoxFn() {
 let checkArray = [];
 
 $(".skillCheck").click(function () {
-  var checkvalue = $(this).val();
+  let checkValue = $(this).val();
   
-  checkArray.push(checkvalue);
+  checkArray.push(checkValue);
   console.log(checkArray);
 });
 // set_description
 const submitBtn = document.getElementById('submitBtn');
 submitBtn.addEventListener("click", async function () {
-  console.log('click');
   const form = new FormData();
+  const userEmail = getLocalStorage('email');
   const url = `${HOST_URL_EID_DAEMON}/accounts/set_description`;
 
-  form.append("email", "200@gmail.com");
-  form.append("description", `{\"hhhhhhh\":[${checkArray}]}`);
+  form.append("email", userEmail);
+  form.append("description", `{"hhhhhhh":[${checkArray}]}`);
 
   await setDescription(url, form);
 });

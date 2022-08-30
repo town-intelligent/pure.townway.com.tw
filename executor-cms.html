@@ -23,7 +23,6 @@
   <script src="static/js/set-page-info.js"></script>
   <script src="static/js/init.js"></script>
   <script src="static/js/getGroup.js"></script>
-  <script src="static/js/set-description.js"></script>
 </head>
 
 <body>
@@ -35,20 +34,6 @@
             <img class="mr-1 logo-isu" src="static/imgs/eID-logo.png">
             <img class="logo-isu" src="static/imgs/ISU logo-s.png">
           </a>
-          <ul class="nav nav-tabs w-100 mr-3">
-            <li class="nav-item">
-              <a class="nav-link active" href="/eid.html">身分證</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/issues.html">永續合作</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/foot_print.html">數位足跡</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/wallet.html">領取任務</a>
-            </li>
-          </ul>
           <a class="navbar-brand mr-0 ml-auto" href="#" data-toggle="dropdown" href="#" role="button"
             aria-expanded="false">
             <img style="width: 45px" src="static/imgs/user-edit-solid.svg">
@@ -102,7 +87,7 @@
             <div class="form-row">
               <div class="form-group col-sm-3">
                 <div class="form-check d-flex align-items-center">
-                  <input class="form-check-input checkbox-1x skillCheck" type="checkbox" id="gridCheck1">
+                  <input class="form-check-input checkbox-1x skillCheck" value="行政支援" type="checkbox" id="gridCheck1">
                   <label class="form-check-label pl-3" for="gridCheck1">
                     1. 行政支援
                   </label>
@@ -110,7 +95,7 @@
               </div>
               <div class="form-group col-sm-3">
                 <div class="form-check d-flex align-items-center">
-                  <input class="form-check-input checkbox-1x skillCheck" type="checkbox" id="gridCheck2">
+                  <input class="form-check-input checkbox-1x skillCheck" value="課業輔導" type="checkbox" id="gridCheck2">
                   <label class="form-check-label pl-3" for="gridCheck2">
                     2. 課業輔導
                   </label>
@@ -118,7 +103,7 @@
               </div>
               <div class="form-group col-sm-3">
                 <div class="form-check d-flex align-items-center">
-                  <input class="form-check-input checkbox-1x skillCheck" type="checkbox" id="gridCheck3">
+                  <input class="form-check-input checkbox-1x skillCheck" value="社區服務" type="checkbox" id="gridCheck3">
                   <label class="form-check-label pl-3" for="gridCheck3">
                     3. 社區服務
                   </label>
@@ -126,7 +111,7 @@
               </div>
               <div class="form-group col-sm-3">
                 <div class="form-check d-flex align-items-center">
-                  <input class="form-check-input checkbox-1x skillCheck" type="checkbox" id="gridCheck4">
+                  <input class="form-check-input checkbox-1x skillCheck" value="生活扶助" type="checkbox" id="gridCheck4">
                   <label class="form-check-label pl-3" for="gridCheck4">
                     4. 生活扶助
                   </label>
@@ -134,7 +119,7 @@
               </div>
               <div class="form-group col-sm-3">
                 <div class="form-check d-flex align-items-center">
-                  <input class="form-check-input checkbox-1x skillCheck" type="checkbox" id="gridCheck5">
+                  <input class="form-check-input checkbox-1x skillCheck" value="電腦科技" type="checkbox" id="gridCheck5">
                   <label class="form-check-label pl-3" for="gridCheck5">
                     5. 電腦科技
                   </label>
@@ -142,7 +127,7 @@
               </div>
               <div class="form-group col-sm-3">
                 <div class="form-check d-flex align-items-center">
-                  <input class="form-check-input checkbox-1x skillCheck" type="checkbox" id="gridCheck6">
+                  <input class="form-check-input checkbox-1x skillCheck" value="環保教育" type="checkbox" id="gridCheck6">
                   <label class="form-check-label pl-3" for="gridCheck6">
                     6. 環保教育
                   </label>
@@ -150,7 +135,7 @@
               </div>
               <div class="form-group col-sm-3">
                 <div class="form-check d-flex align-items-center">
-                  <input class="form-check-input checkbox-1x skillCheck" type="checkbox" id="gridCheck7">
+                  <input class="form-check-input checkbox-1x skillCheck" value="藝術文化" type="checkbox" id="gridCheck7">
                   <label class="form-check-label pl-3" for="gridCheck7">
                     7. 藝術文化
                   </label>
@@ -158,7 +143,7 @@
               </div>
               <div class="form-group col-sm-3">
                 <div class="form-check d-flex align-items-center">
-                  <input class="form-check-input checkbox-1x skillCheck" type="checkbox" id="gridCheck8">
+                  <input class="form-check-input checkbox-1x skillCheck" value="健康醫療" type="checkbox" id="gridCheck8">
                   <label class="form-check-label pl-3" for="gridCheck8">
                     8. 健康醫療
                   </label>
@@ -166,7 +151,7 @@
               </div>
               <div class="form-group col-sm-3">
                 <div class="form-check d-flex align-items-center">
-                  <input class="form-check-input checkbox-1x skillCheck" type="checkbox" id="gridCheck9">
+                  <input class="form-check-input checkbox-1x skillCheck" value="權益倡導" type="checkbox" id="gridCheck9">
                   <label class="form-check-label pl-3" for="gridCheck9">
                     9. 權益倡導
                   </label>
@@ -195,12 +180,12 @@
             </div>
           </div>
         </div>
-        <div class="row my-4">
-          <div class="col-12">
+        <div class="row my-4 justify-content-center">
+          <div class="col-sm-8">
             <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-primary d-none d-sm-block" style="width: 15%"
-                id="submitBtn">儲存</button>
-              <button type="submit" class="btn btn-primary d-sm-none" style="width: 30%" id="submitBtn">儲存</button>
+              <!-- <button type="submit" class="btn btn-primary d-none d-sm-block" style="width: 15%"
+                id="submitBtn">儲存</button> -->
+              <button type="submit" class="btn btn-primary w-25" id="submitBtn">儲存</button>
             </div>
           </div>
         </div>
@@ -208,6 +193,7 @@
       </div>
     </section>
   </div>
+  <script src="static/js/set-description.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 

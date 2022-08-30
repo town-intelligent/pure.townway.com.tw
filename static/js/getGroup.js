@@ -1,7 +1,7 @@
 const form = new FormData();
-// const userEmail = getLocalStorage('email');
+const userEmail = getLocalStorage('email');
 const dataJason = {};
-form.append("email", '400@gmail.com');
+form.append("email", userEmail);
 
 let settings = {
   "url": `${HOST_URL_EID_DAEMON}/accounts/get_group`,
