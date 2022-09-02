@@ -38,7 +38,7 @@ function getGroup(data){
 }
 
 function dropdown () {
-  return `<a class="dropdown-item d-flex align-items-center" href="/backend/edit-info.html">
+  return `<a class="dropdown-item d-flex align-items-center" href="/backend/exercutor-cms.html">
     <img src="/static/imgs/personal_info.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
     <span class="pl-2">基本資料</span>
   </a>
