@@ -26,11 +26,11 @@ function getGroup(data){
     Dropdown.innerHTML=`
     ${dropdown()}
     <a class="dropdown-item d-flex align-items-center" href="#">
-      <img src="static/imgs/cooperate.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
+      <img src="/static/imgs/cooperate.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
       <span class="pl-2">永續合作</span>
     </a>
     <a class="dropdown-item d-flex align-items-center" href="#">
-      <img src="static/imgs/groups.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
+      <img src="/static/imgs/groups.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
       <span class="pl-2">志工專區</span>
     </a>
     `
@@ -39,11 +39,11 @@ function getGroup(data){
 
 function dropdown () {
   return `<a class="dropdown-item d-flex align-items-center" href="/backend/edit-info.html">
-    <img src="static/imgs/personal_info.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
+    <img src="/static/imgs/personal_info.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
     <span class="pl-2">基本資料</span>
   </a>
   <a class="dropdown-item d-flex align-items-center" href="/eid.html">
-    <img src="static/imgs/eID.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
+    <img src="/static/imgs/eID.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
     <span class="pl-2">數位身分證</span>
   </a>`
 }

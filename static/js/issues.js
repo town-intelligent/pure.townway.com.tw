@@ -39,9 +39,9 @@ function set_issue_summary(obj_target_uuid, obj_list_uuid) {
       if ( obj_task.ticket[ "s" + index.toString()] == 1) {
         var img_upper = document.createElement("img");
 
-          path = "static/imgs/SDGS/E_WEB_0";
+          path = "/static/imgs/SDGS/E_WEB_0";
           if (index > 10) {
-	    path = "static/imgs/SDGS/E_WEB_";  
+	    path = "/static/imgs/SDGS/E_WEB_";  
 	  }
 
           img_upper.src = path + index.toString()  + ".png";

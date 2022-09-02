@@ -11,13 +11,14 @@
       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link href="static/css/style.css" rel="stylesheet" type="text/css">
-    <script src="static/js/config.js"></script>
-    <script src="static/js/localStorage.js"></script>
-    <script src="static/js/navbar.js"></script>
-    <script src="static/js/auth.js"></script>
-    <script src="static/js/set-page-info.js"></script>
-    <script src="static/js/init.js"></script>
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/localStorage.js"></script>
+    <script src="/static/js/navbar.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/set-page-info.js"></script>
+    <script src="/static/js/init.js"></script>
+    <script src="/static/js/getGroup.js"></script>
   </head>
 
   <body onload="init();">
@@ -26,8 +27,8 @@
         <div class="col">
           <nav class="navbar navbar-expand-sm navbar-light bg-white align-items-center px-0">
             <a class="navbar-brand mr-0" href="index.html">
-              <img class="mr-1 logo-isu" src="static/imgs/eID-logo.png">
-              <img class="logo-isu" src="static/imgs/ISU logo-s.png">
+              <img class="mr-1 logo-isu" src="/static/imgs/eID-logo.png">
+              <img class="logo-isu" src="/static/imgs/ISU logo-s.png">
 	    </a>
               <ul class="nav nav-tabs w-100 mr-3">
                 <li class="nav-item">
@@ -43,23 +44,25 @@
                   <a class="nav-link active" href="/wallet.html">領取任務</a>
                 </li>
               </ul>
-              <a class="navbar-brand mr-0" href="/backend/edit-info.html">
-                <img style="width: 45px"src="static/imgs/user-edit-solid.svg">
+              <a class="navbar-brand mr-0 ml-auto d-none d-sm-block" href="#" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                <img style="width: 45px"src="/static/imgs/user-edit-solid.svg">
               </a>
+              <div class="dropdown-menu dropdown-menu-right" id="dropdown">
+              </div>
           </nav>
           <div class="container">
             <div class="row justify-content-center mt-4 pt-3">
               <div class="col-7">
                 <div class="text-center">
 
-		  <script src="static/html5-qrcode/dist/html5-qrcode.min.js"></script>
-                  <script src="static/js/qrcode.js"></script>
+		  <script src="/static/html5-qrcode/dist/html5-qrcode.min.js"></script>
+                  <script src="/static/js/qrcode.js"></script>
                   <div id="qr-reader" style="width: 350px"></div>
                 </div>
               </div>
               <div class="col-5">
                 <div class="text-center">
-                  <img src="static/imgs/qrcode.png" alt="">
+                  <img src="/static/imgs/qrcode.png" alt="">
                 </div>
               </div>
             </div>
