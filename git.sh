@@ -1,1 +1,1 @@
-git add . ; git commit --amend -m "feat: add getGroup.js in wallet page" ; git push -f
+git add . ; git commit -m "feat: completed dropdown menu" ; git push
