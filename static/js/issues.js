@@ -192,9 +192,9 @@ function get_user_uuid_tasks(username) {
          } 
 
 	 if( getLocalStorage(obj.uuid[i]) == "" || obj_uuid.ticket == "") {
-             get_task_info(obj.uuid[i]);
+        get_task_info(obj.uuid[i]);
 	   } else {
-             var obj_task = getLocalStorage(obj.uuid[i]);
+       var obj_task = getLocalStorage(obj.uuid[i]);
 	     set_task_in_page(JSON.parse(obj_task));
 	   }
        }
@@ -361,4 +361,47 @@ function clickAll() {
   }
 
   addToVerify(index);
+}
+
+function list_plan_tasks(uuid, parent) {
+  var dataJSON = {};
+  var returnDataJSON = {};
+  dataJSON.uuid = uuid;
+  dataJSON.parent = parent;
+
+  $.ajax({
+    url: HOST_URL_TPLANET_DAEMON + "/projects/tasks",
+    type: "POST",
+    async: false,
+    crossDomain: true,
+    data:  dataJSON,
+    success: function(returnData) {
+       returnDataJSON = JSON.parse(returnData);
+    },
+    error: function(xhr, ajaxOptions, thrownError){
+      console.log(thrownError);
+    }
+  });
+  return returnDataJSON;
+}
+
+function get_task_info(uuid) {
+  var dataJSON = {};
+
+  $.ajax({
+    url: HOST_URL_TPLANET_DAEMON + "/tasks/get/" + uuid,
+    type: "GET",
+    async: false,
+    crossDomain: true,
+    data:  dataJSON,
+    success: function(returnData) {
+       const obj = JSON.parse(returnData);
+       dataJSON = obj;
+    },
+    error: function(xhr, ajaxOptions, thrownError){
+      console.log(thrownError);
+    }
+  });
+
+  return dataJSON;
 }

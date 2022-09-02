@@ -14,11 +14,19 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <link href="/static/css/style.css" rel="stylesheet" type="text/css">
+  <script src="/static/js/qrcode-handler.js"></script>
   <script src="/static/js/config.js"></script>
+  <script src="/static/js/localStorage.js"></script>
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/navbar.js"></script>
   <script src="/static/js/get-task.js"></script>
+  <script src="/static/js/issues.js"></script>
+  <script src="/static/js/verifier-cms-content.js"></script>
+  <script src="/static/js/set-page-info.js"></script>
+  <script src="/static/js/init.js"></script>
 </head>
 
-<body>
+<body onload="init();">
   <div class="container-fluid border border-secondary border-width-lg min-vh-100">
     <div class="row">
       <div class="col">
@@ -72,22 +80,21 @@
             </div>
             <div class="mt-3">
               <p class="h5">志工任務時數</p>
-              <p><span>2</span>小時</p>
+              <p><span id="token">0</span>小時</p>
             </div>
           </div>
           <div class="col-10 mt-3">
             <div class="row">
-              <div class="col-6">
+              <div class="col-12">
                 <div class="d-flex flex-column">
-                  <p class="text-center text-sm-left h5">志工任務</p>
-                  <img class="qr-code-width" src="/static/imgs/executor-qr-code.png" alt="">
+                  <p id="task_qrcode" class="text-center text-sm-left h5">志工任務</p>
+                  <!-- <img class="qr-code-width" src="/static/imgs/executor-qr-code.png" alt=""> -->
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-12">
                 <div class="d-flex flex-column">
-                  <p class="text-center text-sm-left h5">驗證方</p>
-                  <img class="qr-code-width" src="/static/imgs/verifier-qr-code.png" alt="">
-
+                  <p id="verifier_qrcode" class="text-center text-sm-left h5">驗證方</p>
+                  <!-- <img class="qr-code-width" src="/static/imgs/verifier-qr-code.png" alt=""> -->
                 </div>
               </div>
             </div>

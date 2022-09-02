@@ -23,7 +23,12 @@ submitBtn.addEventListener("click", async function () {
   const url = `${HOST_URL_EID_DAEMON}/accounts/set_description`;
 
   form.append("email", userEmail);
-  form.append("description", `{"hhhhhhh":[${checkArray}]}`);
+  
+  var obj_sed = {};
+  obj_sed.hhhhhhh = checkArray;
+
+  // form.append("description", `{"hhhhhhh":[${checkArray}]}`);
+  form.append("description", JSON.stringify(obj_sed));;
 
   await setDescription(url, form);
 });

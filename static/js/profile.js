@@ -67,3 +67,59 @@ function getAvatarImg() {
 
   return "OK"
 }
+
+function get_group() {
+  const form = new FormData();
+  const userEmail = getLocalStorage('email');
+  var dataJason = {};
+  form.append("email", userEmail);
+
+  let settings = {
+    "url": `${HOST_URL_EID_DAEMON}/accounts/get_group`,
+    "method": "POST",
+    "timeout": 0,
+    "processData": false,
+    "mimeType": "multipart/form-data",
+    "contentType": false,
+    "data": form,
+    "async": false
+  };
+
+  $.ajax(settings).done(/*async*/ function (res) {
+    const obj = JSON.parse(res);
+    dataJason =  obj;
+  });
+
+  return dataJason;
+}
+
+function get_des(){
+  const form = new FormData();
+  // const userEmail = getLocalStorage('email');
+  // const userEmail = "200@gmail.com";
+  // const userGroup = "202";
+  //form.append("group", userGroup);
+  form.append("email", getLocalStorage('email'));
+  var dataJason = {};
+
+  
+    
+    let settings = {
+      url: `${HOST_URL_EID_DAEMON}/accounts/get_description`,
+      method: "POST",
+      timeout: 0,
+      processData: false,
+      mimeType: "multipart/form-data",
+      contentType: false,
+      data: form,
+      async: false
+    };
+
+    $.ajax(settings).done(function (skillRes) {
+      const skillObj = JSON.parse(skillRes);
+      dataJason = skillObj;
+    });
+
+  return dataJason;
+}
+

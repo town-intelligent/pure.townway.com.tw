@@ -1,1 +1,1 @@
-git add . ; git commit -m "feat: completed dropdown menu" ; git push
+git add . ; git commit --amend -m "fix set skill" ; git push -f

@@ -12,9 +12,18 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link href="/static/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/localStorage.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/navbar.js"></script>
+    <script src="/static/js/issues.js"></script>
+    <script src="/static/js/set_page_info_verifier_cms_list.js"></script>
+    <script src="/static/js/set-page-info.js"></script>
+    <script src="/static/js/init.js"></script>
+    <!-- <script src="/static/js/getGroup.js"></script> -->
   </head>
 
-  <body>
+  <body onload="init();">
     <div class="container-fluid border border-secondary border-width-lg min-vh-100">
       <div class="row">
         <div class="col">
@@ -35,11 +44,11 @@
                   <img src="/static/imgs/eID.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
                   <span class="pl-2">數位身分證</span>
                 </a>
-                <a class="dropdown-item d-flex align-items-center" href="verifier-cms-list.html">
+                <a class="dropdown-item d-flex align-items-center" href="/verifier-cms-list.html">
                   <img src="/static/imgs/cooperate.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
                   <span class="pl-2">永續合作</span>
                 </a>
-                <a class="dropdown-item d-flex align-items-center" href="verifier-cms-executor-section.html">
+                <a class="dropdown-item d-flex align-items-center" href="/verifier-cms-executor-section.html">
                   <img src="/static/imgs/groups.svg" alt="" width="30" height="30" class="d-inline-block align-middle">
                   <span class="pl-2">志工專區</span>
                 </a>
@@ -53,13 +62,15 @@
           <div class="row justify-content-center mt-4">
             <div class="col-md-12">
               <p>永續合作列表</p>
-              <button class="btn btn-primary">新增</button>
+              <button class="btn btn-primary" 
+              onclick="window.location.replace('verifier-cms-creation.html')">新增</button>
             </div>
           </div>
           <div class="row justify-content-center mt-4 mb-5">
             <div class="col-md-12">
-              <div class="row justify-content-between">
-                <div class="col-sm-4">
+              <div id="task_container" class="row justify-content-md-start">
+                
+                <!-- <div class="col-sm-4">
                   <div class="card mb-4 rounded-0">
                     <div class="d-flex justify-content-center">
                       <div class="img-fluid bg-cover" style="background-image:url(/static/imgs/Task-1.jpg); width:100% ;height:120px"></div>
@@ -69,6 +80,7 @@
                     </div>
                   </div>
                 </div>
+                
                 <div class="col-sm-4">
                   <div class="card mb-4 rounded-0">
                     <div class="d-flex justify-content-center">
@@ -79,6 +91,7 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="col-sm-4">
                   <div class="card mb-4 rounded-0">
                     <div class="d-flex justify-content-center">
@@ -89,7 +102,20 @@
                     </div>
                   </div>
                 </div>
-              </div>
+
+
+                <div class="col-sm-4">
+                  <div class="card mb-4 rounded-0">
+                    <div class="d-flex justify-content-center">
+                      <div class="img-fluid bg-cover" style="background-image:url(/static/imgs/Task-1.jpg); width:100% ;height:120px"></div>
+                    </div>
+                    <div class="card-body p-2">
+                      <p class="mb-0">除草2</p>
+                    </div>
+                  </div>
+                </div> -->
+
+              </div> <!-- task container -->
             </div>
           </div>
         </div>
