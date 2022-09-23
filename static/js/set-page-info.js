@@ -72,23 +72,13 @@ function setPageInfo() {
       var list_task_UUIDs  = [];
       if (str_list_task_UUIDs === "") {
         // Get user task UUIDs
-        console.log("001");
         list_task_UUIDs = list_tasks(getLocalStorage("username"));
         setLocalStorage("list_tasks", JSON.stringify(list_task_UUIDs));
       } else {
-        console.log("002");
-
-        /* var a1 = JSON.parse(str_list_task_UUIDs);
-        console.log("hello a1 = " + a1[0]); */
-
         list_task_UUIDs = JSON.parse(str_list_task_UUIDs);
       }
 
       // Ready to verified tasks
-      console.log("hello, list_task_UUIDs");
-      console.log(typeof(list_task_UUIDs));
-      console.log(JSON.stringify(list_task_UUIDs));
-      console.log(list_task_UUIDs[0]);
       for (var index = 0; index < list_task_UUIDs.length; index ++) {
         updateVerifyTasksTable(list_task_UUIDs[index]);
       }

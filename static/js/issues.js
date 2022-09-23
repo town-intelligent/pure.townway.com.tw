@@ -224,7 +224,7 @@ function list_tasks(username) {
   dataJSON.username = username;
   dataJSON.task_type = "1";
   $.ajax({
-    url: HOST_URL_EID_DAEMON + "/tasks/verify_list",
+    url: HOST_URL_EID_DAEMON + "/tasks/list",
     type: "POST",
     async: false,
     crossDomain: true,
