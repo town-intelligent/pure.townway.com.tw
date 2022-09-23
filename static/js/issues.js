@@ -223,7 +223,7 @@ function list_tasks(username) {
   var dataJSON = {};
   dataJSON.username = username;
   $.ajax({
-    url: HOST_URL_EID_DAEMON + "/tasks/list",
+    url: HOST_URL_EID_DAEMON + "/tasks/verify_list",
     type: "POST",
     async: false,
     crossDomain: true,
