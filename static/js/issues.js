@@ -242,6 +242,30 @@ function list_tasks(username) {
   return list_issues;
 }
 
+function list_verify_tasks(group, task_type) {
+  var list_issues = [];
+  var dataJSON = {};
+  dataJSON.group = group;
+  dataJSON.task_type = task_type;
+  $.ajax({
+    url: HOST_URL_EID_DAEMON + "/tasks/verify_list",
+    type: "POST",
+    async: false,
+    crossDomain: true,
+    data:  dataJSON,
+    success: function(returnData) {
+       const obj = JSON.parse(returnData);
+       list_issues = obj.uuid;
+    },
+    error: function(xhr, ajaxOptions, thrownError){
+      console.log(thrownError);
+    }
+  });
+  return list_issues;
+}
+
+
+
 function addToVerify(length) {
   // Task UUID
   var list_tasks = [];
