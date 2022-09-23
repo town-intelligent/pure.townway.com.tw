@@ -77,6 +77,10 @@ function setPageInfo() {
         setLocalStorage("list_tasks", JSON.stringify(list_task_UUIDs));
       } else {
         console.log("002");
+
+        var a1 = JSON.parse(str_list_task_UUIDs);
+        console.log("hello a1 = " + a1[0]);
+
         list_task_UUIDs = str_list_task_UUIDs.split(",");
       }
 
