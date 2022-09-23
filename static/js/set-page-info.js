@@ -78,10 +78,10 @@ function setPageInfo() {
       } else {
         console.log("002");
 
-        var a1 = JSON.parse(str_list_task_UUIDs);
-        console.log("hello a1 = " + a1[0]);
+        /* var a1 = JSON.parse(str_list_task_UUIDs);
+        console.log("hello a1 = " + a1[0]); */
 
-        list_task_UUIDs = str_list_task_UUIDs.split(",");
+        list_task_UUIDs = JSON.parse(str_list_task_UUIDs);
       }
 
       // Ready to verified tasks
