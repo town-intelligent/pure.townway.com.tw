@@ -80,6 +80,7 @@ function setPageInfo() {
 
       // Ready to verified tasks
       console.log("hello, list_task_UUIDs");
+      console.log(typeof(list_task_UUIDs));
       console.log(JSON.stringify(list_task_UUIDs));
       for (var index = 0; index < list_task_UUIDs.length; index ++) {
         updateVerifyTasksTable(list_task_UUIDs[index]);
