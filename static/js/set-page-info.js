@@ -72,9 +72,11 @@ function setPageInfo() {
       var list_task_UUIDs  = [];
       if (str_list_task_UUIDs === "") {
         // Get user task UUIDs
+        console.log("001");
         list_task_UUIDs = list_tasks(getLocalStorage("username"));
         setLocalStorage("list_tasks", JSON.stringify(list_task_UUIDs));
       } else {
+        console.log("002");
         list_task_UUIDs = str_list_task_UUIDs.split(",");
       }
 
