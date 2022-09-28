@@ -69,7 +69,7 @@ function setPageInfo() {
       
     } else if (page === "issue-verifier.html") {
       // Get all tasks and users
-      var str_list_task_UUIDs = getLocalStorage("list_tasks");
+      /* var str_list_task_UUIDs = getLocalStorage("list_tasks");
       var list_task_UUIDs  = [];
       if (str_list_task_UUIDs === "") {
         // Get user task UUIDs
@@ -77,12 +77,26 @@ function setPageInfo() {
         setLocalStorage("list_tasks", JSON.stringify(list_task_UUIDs));
       } else {
         list_task_UUIDs = JSON.parse(str_list_task_UUIDs);
-      }
+      } */
+
+      var list_task_UUIDs = list_verify_tasks("203", "1");
+      //alert(list_task_UUIDs);
+
+      list_task_UUIDs = removeDuplicates(list_task_UUIDs);
+
+      //alert(list_task_UUIDs);
 
       // Ready to verified tasks
+      var list_summary = [];
       for (var index = 0; index < list_task_UUIDs.length; index ++) {
-        updateVerifyTasksTable(list_task_UUIDs[index]);
+        list_summary = list_summary.concat(updateVerifyTasksTable(list_task_UUIDs[index]));
+        // alert("hello, here");
+        // alert(JSON.stringify(obj_summary));
+        // addVrerifyTable(list_task_UUIDs[index]);
       }
+
+      // alert(JSON.stringify(list_summary));
+      addVrerifyTable(list_summary);
     }
   
   } else if (page == "foot_print.html") {
@@ -203,11 +217,14 @@ function setPageInfo() {
         }
       });
     } else if (page == "verifier-cms-list.html") {
-      // alert("ok");
       var arr_tasks = list_plan_tasks("00000001", "1");
       set_page_info_verifier_cms_list(arr_tasks.tasks);
       console.log(arr_tasks);
     } else if (page == "verifier-cms-content.html") {
       set_page_info_verifier_cms_content();
+    } else if (page == "verified-tasks.html") {
+      var repos_verified_tasks = get_verified_tasks();
+      var list_verified_tasks = repos_verified_tasks.uuid;
+      addVerifiedTable(list_verified_tasks);
     }
 }
