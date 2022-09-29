@@ -293,8 +293,6 @@ function addToVerify(length) {
 function addVrerifyTable(obj) {
   // table_verify_tasks
   var tbodyRef = document.getElementById("table_verify_tasks").getElementsByTagName("tbody")[0];
-
-  // alert(JSON.stringify(obj));
  
   for (var index = 0; index < obj.length; index ++) {
     // Insert a row at the end of table
@@ -331,11 +329,11 @@ function addVrerifyTable(obj) {
     newText_email.id = "email_" + index;
     newCell_email.appendChild(newText_email);
 
-    var newCell_email_div = newRow.insertCell();
+    /* var newCell_email_div = newRow.insertCell();
     var obj_email = document.createElement("div");
     obj_email.id = "email_" + index;
     obj_email.value = obj[index].email;
-    newCell_email_div.appendChild(obj_email);
+    newCell_email_div.appendChild(obj_email); */
     
     // Task name
     var newCell_task_name = newRow.insertCell();
