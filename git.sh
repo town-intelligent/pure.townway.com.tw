@@ -1,1 +1,1 @@
-git add . ; git commit -m "fix: issue-verifier form style" ; git push
+git add . ; git commit -m "fix: uncheck others checkbox" ; git push
