@@ -341,11 +341,11 @@ function addVrerifyTable(obj) {
     newCell_task_name.appendChild(newText_task_name);
 
     // Task UUID
-    var newCell_uuid = newRow.insertCell();
+    /* var newCell_uuid = newRow.insertCell();
     var obj_uuid = document.createElement("div");
     obj_uuid.id = "uuid_" + index;
     obj_uuid.value = obj[index].uuid;
-    newCell_uuid.appendChild(obj_uuid);
+    newCell_uuid.appendChild(obj_uuid); */
 
     // Token
     var newCell_token = newRow.insertCell();
