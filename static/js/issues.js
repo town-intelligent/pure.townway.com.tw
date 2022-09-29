@@ -328,24 +328,11 @@ function addVrerifyTable(obj) {
     var newText_email = document.createTextNode(obj[index].email);
     newText_email.id = "email_" + index;
     newCell_email.appendChild(newText_email);
-
-    /* var newCell_email_div = newRow.insertCell();
-    var obj_email = document.createElement("div");
-    obj_email.id = "email_" + index;
-    obj_email.value = obj[index].email;
-    newCell_email_div.appendChild(obj_email); */
     
     // Task name
     var newCell_task_name = newRow.insertCell();
     var newText_task_name = document.createTextNode(obj[index].task_name);
     newCell_task_name.appendChild(newText_task_name);
-
-    // Task UUID
-    /* var newCell_uuid = newRow.insertCell();
-    var obj_uuid = document.createElement("div");
-    obj_uuid.id = "uuid_" + index;
-    obj_uuid.value = obj[index].uuid;
-    newCell_uuid.appendChild(obj_uuid); */
 
     // Token
     var newCell_token = newRow.insertCell();
