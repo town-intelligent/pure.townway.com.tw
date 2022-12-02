@@ -271,16 +271,20 @@ function addToVerify(length) {
   var list_tasks = [];
   for (var index = 0; index < length; index ++) {
     var checkbox = document.getElementById("checkbox_" + index);
+    
+    // FIXME
+    // var uuid = document.getElementById("uuid_" + index);
+    // var obj_checkbox = document.getElementById("check_" + index);
+    
     var email = document.getElementById("email_" + index);
-    var uuid = document.getElementById("uuid_" + index);
     
     if (checkbox.checked === false) {
       continue;
     }
 
     var dataJSON = {};
-    dataJSON.email = email.value;
-    dataJSON.uuid = uuid.value;
+    dataJSON.uuid = checkbox.name;
+    dataJSON.email = email.innerHTML;
 
     list_tasks.push(dataJSON);
   }
@@ -309,7 +313,10 @@ function addVrerifyTable(obj) {
     var checkbox = document.createElement('input');
     checkbox.type = "checkbox";
     checkbox.id = "checkbox_" + index;
-	  
+    
+    // FIXME
+    checkbox.name = obj[index].uuid;
+    
     checkbox.onclick = function () {
       addToVerify(obj.length);
     };
@@ -319,24 +326,49 @@ function addVrerifyTable(obj) {
     th.appendChild(checkbox);
 
     // Username
+    // var newCell_username = newRow.insertCell();
+    // var newText_username = document.createTextNode(obj[index].username);
+    // newCell_username.appendChild(newText_username);
+    
+    // E-Mail
+    // var newCell_email = newRow.insertCell();
+    // var newText_email = document.createTextNode(obj[index].email);
+    // newText_email.id = "email_" + index;
+    // newCell_email.appendChild(newText_email);
+    
+    // Task name
+    // var newCell_task_name = newRow.insertCell();
+    // var newText_task_name = document.createTextNode(obj[index].task_name);
+    // newCell_task_name.appendChild(newText_task_name);
+
+    // Token
+    // var newCell_token = newRow.insertCell();
+    // var newText_token = document.createTextNode(obj[index].token);
+    // newCell_token.appendChild(newText_token);
+    
+    // Username
     var newCell_username = newRow.insertCell();
-    var newText_username = document.createTextNode(obj[index].username);
+    var newText_username = document.createElement("div");
+    newCell_username.innerHTML = obj[index].username;
     newCell_username.appendChild(newText_username);
     
     // E-Mail
     var newCell_email = newRow.insertCell();
-    var newText_email = document.createTextNode(obj[index].email);
+    var newText_email = document.createElement("div");
     newText_email.id = "email_" + index;
+    newText_email.innerHTML = obj[index].email;
     newCell_email.appendChild(newText_email);
     
     // Task name
     var newCell_task_name = newRow.insertCell();
-    var newText_task_name = document.createTextNode(obj[index].task_name);
+    var newText_task_name = document.createElement("div");
+    newText_task_name.innerHTML = obj[index].task_name;
     newCell_task_name.appendChild(newText_task_name);
 
     // Token
     var newCell_token = newRow.insertCell();
-    var newText_token = document.createTextNode(obj[index].token);
+    var newText_token = document.createElement("div");
+    newText_token.innerHTML = obj[index].token;
     newCell_token.appendChild(newText_token);
   }
 }
