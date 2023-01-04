@@ -49,7 +49,7 @@ function setPageInfo() {
     
     // List issues
     if (page === "issues.html") {
-      list_issues(getLocalStorage("username"));
+      list_issues(getLocalStorage("email"));
       set_page_info_issues();
     } else if (page === "issue-executor.html") {
       // Get task
@@ -70,6 +70,7 @@ function setPageInfo() {
     } else if (page === "issue-verifier.html") {
 
       var list_task_UUIDs = list_verify_tasks("203", "1");
+
       list_task_UUIDs = removeDuplicates(list_task_UUIDs);
 
       // Ready to verified tasks
